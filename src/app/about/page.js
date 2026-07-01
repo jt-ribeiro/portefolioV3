@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
 import styles from "./page.module.css";
 
 const fadeUp = {
@@ -13,34 +14,10 @@ const stagger = {
   show: { transition: { staggerChildren: 0.12, delayChildren: 0.1 } },
 };
 
-const highlights = [
-  { emoji: "🎓", title: "Formação", value: "Lic. Computação Gráfica e Multimédia", sub: "ESTG Viana do Castelo" },
-  { emoji: "💼", title: "Foco Atual", value: "Fullstack Development", sub: "React · Next.js · Node.js" },
-  { emoji: "📍", title: "Localização", value: "Viana do Castelo", sub: "Portugal 🇵🇹" },
-  { emoji: "🌐", title: "Idiomas", value: "Português (Nativo)", sub: "Inglês (Avançado)" },
-  { emoji: "🚀", title: "Paixão", value: "IA & Inovação", sub: "TensorFlow · Automação" },
-  { emoji: "🎯", title: "Objetivo", value: "Impacto Real", sub: "Produtos que as pessoas usam" },
-];
-
-const values = [
-  {
-    icon: "⚡",
-    title: "Velocidade com Qualidade",
-    desc: "Entrego rápido sem sacrificar código limpo, escalável e bem documentado.",
-  },
-  {
-    icon: "🔍",
-    title: "Mentalidade de Produto",
-    desc: "Não código por código — penso sempre no utilizador final e no impacto real.",
-  },
-  {
-    icon: "♾️",
-    title: "Aprendizagem Contínua",
-    desc: "Estou sempre a aprender. Se é novo, difícil ou parece impossível, conta comigo.",
-  },
-];
-
 export default function About() {
+  const { t } = useLanguage();
+  const a = t.about;
+
   return (
     <section className={styles.about}>
       <div className={styles.container}>
@@ -51,13 +28,11 @@ export default function About() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className={styles.pageTag}>whoami</span>
+          <span className={styles.pageTag}>{a.tag}</span>
           <h1 className={styles.pageTitle}>
-            Sobre <span className={styles.accent}>Mim</span>
+            {a.title} <span className={styles.accent}>{a.titleAccent}</span>
           </h1>
-          <p className={styles.pageSubtitle}>
-            Desenvolvedor apaixonado por criar experiências digitais que fazem a diferença.
-          </p>
+          <p className={styles.pageSubtitle}>{a.subtitle}</p>
         </motion.div>
 
         {/* Bio Card */}
@@ -72,18 +47,13 @@ export default function About() {
             <div className={styles.avatarGlow} />
           </div>
           <div className={styles.bioText}>
-            <h2 className={styles.bioName}>Tomás Ribeiro <span className={styles.bioAge}>25</span></h2>
-            <p className={styles.bioParagraph}>
-              Gosto de explorar o desconhecido. Se é novo, difícil ou parece impossível — conta comigo.
-              Trabalho bem em equipa mas também sei ser auto-suficiente. Estou sempre pronto para aprender,
-              errar, corrigir e crescer, tanto pessoalmente como profissionalmente.
-            </p>
-            <p className={styles.bioParagraph}>
-              A minha especialidade é o fullstack — do design da interface à arquitetura da API.
-              Tenho especial interesse em IA aplicada ao produto e em criar interfaces que as pessoas adoram usar.
-            </p>
+            <h2 className={styles.bioName}>
+              {a.bioName} <span className={styles.bioAge}>{a.bioAge}</span>
+            </h2>
+            <p className={styles.bioParagraph}>{a.bioParagraph1}</p>
+            <p className={styles.bioParagraph}>{a.bioParagraph2}</p>
             <a href="mailto:tomasribeiro930@gmail.com" className={styles.contactLink}>
-              Vamos construir algo incrível juntos? →
+              {a.contactCta}
             </a>
           </div>
         </motion.div>
@@ -96,7 +66,7 @@ export default function About() {
           whileInView="show"
           viewport={{ once: true, margin: "-80px" }}
         >
-          {highlights.map(({ emoji, title, value, sub }) => (
+          {a.highlights.map(({ emoji, title, value, sub }) => (
             <motion.div key={title} className={styles.bentoCard} variants={fadeUp}>
               <span className={styles.bentoEmoji}>{emoji}</span>
               <span className={styles.bentoTitle}>{title}</span>
@@ -115,10 +85,10 @@ export default function About() {
           viewport={{ once: true, margin: "-80px" }}
         >
           <motion.h2 className={styles.sectionTitle} variants={fadeUp}>
-            Como trabalho
+            {a.valuesTitle}
           </motion.h2>
           <div className={styles.valuesGrid}>
-            {values.map(({ icon, title, desc }) => (
+            {a.values.map(({ icon, title, desc }) => (
               <motion.div key={title} className={styles.valueCard} variants={fadeUp}>
                 <span className={styles.valueIcon}>{icon}</span>
                 <h3 className={styles.valueTitle}>{title}</h3>

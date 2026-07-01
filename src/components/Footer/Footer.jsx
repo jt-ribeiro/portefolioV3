@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 import styles from "./Footer.module.css";
 
 const socialLinks = [
@@ -34,6 +37,7 @@ const socialLinks = [
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  const { t } = useLanguage();
 
   return (
     <footer className={styles.footer}>
@@ -41,7 +45,7 @@ export default function Footer() {
         <div className={styles.left}>
           <Link href="/" className={styles.logo}>TR</Link>
           <p className={styles.copy}>
-            © {year} Tomás Ribeiro. Feito com 💙 em Portugal.
+            © {year} Tomás Ribeiro. {t.footer.copy}
           </p>
         </div>
 

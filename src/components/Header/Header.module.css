@@ -106,6 +106,50 @@
   background: linear-gradient(135deg, #3b82f6, #7c3aed);
 }
 
+/* Right side actions group */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Language Toggle */
+.langToggle {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.4rem 0.75rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  color: #94a3b8;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.langToggle:hover {
+  background: rgba(59, 130, 246, 0.08);
+  border-color: rgba(59, 130, 246, 0.2);
+  color: #e2e8f0;
+}
+.langLabel {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.78rem;
+}
+.langSep {
+  color: rgba(255,255,255,0.15);
+  font-size: 0.7rem;
+}
+.langOther {
+  color: #475569;
+  font-size: 0.72rem;
+}
+
 /* CTA */
 .ctaBtn {
   padding: 0.5rem 1.25rem;
@@ -204,10 +248,36 @@
   background: rgba(59, 130, 246, 0.1);
 }
 
+/* Mobile lang row inside mobile menu */
+.mobileLangRow {
+  padding: 0.5rem 0.5rem 0;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  margin-top: 0.25rem;
+}
+
+.mobileLangBtn {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1.25rem;
+  background: transparent;
+  border: none;
+  color: #64748b;
+  font-family: var(--font-inter, 'Inter', sans-serif);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 10px;
+  transition: all 0.2s ease;
+}
+.mobileLangBtn:hover {
+  background: rgba(59, 130, 246, 0.08);
+  color: #94a3b8;
+}
+
 @media (max-width: 768px) {
   .header { padding: 0 1.25rem; }
   .links { display: none; }
-  .ctaBtn { display: none; }
-  .burger { display: flex; }
+  .actions { display: none; }
+  .burger { display: flex; margin-left: auto; }
   .logoText { display: none; }
 }

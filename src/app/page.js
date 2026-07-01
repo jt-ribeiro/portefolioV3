@@ -3,9 +3,8 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
 import styles from "./page.module.css";
-
-const ROLES = ["Fullstack Developer", "React & Next.js", "UI/UX Enthusiast", "Problem Solver"];
 
 function useTypewriter(words, speed = 80, pause = 2000) {
   const [display, setDisplay] = useState("");
@@ -15,7 +14,6 @@ function useTypewriter(words, speed = 80, pause = 2000) {
   useEffect(() => {
     const current = words[wordIndex % words.length];
     let timeout;
-
     if (!isDeleting && display === current) {
       timeout = setTimeout(() => setIsDeleting(true), pause);
     } else if (isDeleting && display === "") {
@@ -26,7 +24,6 @@ function useTypewriter(words, speed = 80, pause = 2000) {
         setDisplay(isDeleting ? current.slice(0, display.length - 1) : current.slice(0, display.length + 1));
       }, isDeleting ? speed / 2 : speed);
     }
-
     return () => clearTimeout(timeout);
   }, [display, isDeleting, wordIndex, words, speed, pause]);
 
@@ -34,23 +31,22 @@ function useTypewriter(words, speed = 80, pause = 2000) {
 }
 
 export default function Home() {
-  const role = useTypewriter(ROLES);
+  const { t } = useLanguage();
+  const h = t.home;
+  const role = useTypewriter(h.roles);
   const canvasRef = useRef(null);
 
-  // Particle background
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
     let animId;
     let particles = [];
-
     const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
     };
     resize();
-
     for (let i = 0; i < 60; i++) {
       particles.push({
         x: Math.random() * canvas.width,
@@ -61,7 +57,6 @@ export default function Home() {
         opacity: Math.random() * 0.4 + 0.1,
       });
     }
-
     const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((p) => {
@@ -77,20 +72,13 @@ export default function Home() {
       animId = requestAnimationFrame(draw);
     };
     draw();
-
     window.addEventListener("resize", resize);
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", resize);
-    };
+    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
   }, []);
 
   const container = {
     hidden: { opacity: 0 },
-    show: {
-      opacity: 1,
-      transition: { staggerChildren: 0.18, delayChildren: 0.2 },
-    },
+    show: { opacity: 1, transition: { staggerChildren: 0.18, delayChildren: 0.2 } },
   };
   const item = {
     hidden: { opacity: 0, y: 30 },
@@ -100,25 +88,18 @@ export default function Home() {
   return (
     <section className={styles.hero}>
       <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
-
-      {/* Floating orbs */}
       <div className={styles.orb1} aria-hidden="true" />
       <div className={styles.orb2} aria-hidden="true" />
 
-      <motion.div
-        className={styles.content}
-        variants={container}
-        initial="hidden"
-        animate="show"
-      >
+      <motion.div className={styles.content} variants={container} initial="hidden" animate="show">
         <motion.div className={styles.badge} variants={item}>
           <span className={styles.badgeDot} />
-          Disponível para novos projetos
+          {h.badge}
         </motion.div>
 
         <motion.h1 className={styles.title} variants={item}>
-          Olá, sou o{" "}
-          <span className={styles.gradientText}>Tomás Ribeiro</span>
+          {h.greeting}{" "}
+          <span className={styles.gradientText}>{h.name}</span>
         </motion.h1>
 
         <motion.div className={styles.roleRow} variants={item}>
@@ -128,28 +109,23 @@ export default function Home() {
         </motion.div>
 
         <motion.p className={styles.description} variants={item}>
-          Transformo ideias em experiências digitais de alta performance.
-          Especializado em React, Next.js e Node.js — apaixonado por design e código limpo.
+          {h.description}
         </motion.p>
 
         <motion.div className={styles.actions} variants={item}>
           <Link href="/projects" className={styles.btnPrimary}>
-            Ver Projetos
+            {h.btnProjects}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
               <path d="M5 12h14M12 5l7 7-7 7" />
             </svg>
           </Link>
           <Link href="/contact" className={styles.btnSecondary}>
-            Falar comigo
+            {h.btnContact}
           </Link>
         </motion.div>
 
         <motion.div className={styles.stats} variants={item}>
-          {[
-            { num: "7+", label: "Projetos Entregues" },
-            { num: "3+", label: "Anos de Experiência" },
-            { num: "95+", label: "Lighthouse Score" },
-          ].map(({ num, label }) => (
+          {h.stats.map(({ num, label }) => (
             <div key={label} className={styles.stat}>
               <span className={styles.statNum}>{num}</span>
               <span className={styles.statLabel}>{label}</span>

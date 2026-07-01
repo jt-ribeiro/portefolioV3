@@ -2,11 +2,12 @@
 
 import { useRef } from "react";
 import { motion, useInView } from "framer-motion";
+import { useLanguage } from "@/context/LanguageContext";
 import styles from "./page.module.css";
 
 const skillsData = [
   {
-    category: "Frontend",
+    categoryKey: "Frontend",
     icon: "🖥️",
     color: "#3b82f6",
     skills: [
@@ -19,7 +20,7 @@ const skillsData = [
     ],
   },
   {
-    category: "Backend",
+    categoryKey: "Backend",
     icon: "⚙️",
     color: "#7c3aed",
     skills: [
@@ -30,7 +31,7 @@ const skillsData = [
     ],
   },
   {
-    category: "Databases",
+    categoryKey: "Databases",
     icon: "🗄️",
     color: "#06b6d4",
     skills: [
@@ -40,7 +41,7 @@ const skillsData = [
     ],
   },
   {
-    category: "Tools & Design",
+    categoryKey: "Tools & Design",
     icon: "🎨",
     color: "#10b981",
     skills: [
@@ -77,6 +78,9 @@ function SkillBar({ skill, color, delay }) {
 }
 
 export default function Skills() {
+  const { t } = useLanguage();
+  const s = t.skills;
+
   return (
     <section className={styles.skills}>
       <div className={styles.container}>
@@ -86,19 +90,17 @@ export default function Skills() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <span className={styles.pageTag}>./skills</span>
+          <span className={styles.pageTag}>{s.tag}</span>
           <h1 className={styles.pageTitle}>
-            O meu <span className={styles.accent}>Arsenal</span>
+            {s.title} <span className={styles.accent}>{s.titleAccent}</span>
           </h1>
-          <p className={styles.pageSubtitle}>
-            Tecnologias que uso no dia a dia para entregar produtos de qualidade.
-          </p>
+          <p className={styles.pageSubtitle}>{s.subtitle}</p>
         </motion.div>
 
         <div className={styles.categoriesGrid}>
-          {skillsData.map(({ category, icon, color, skills }, catIdx) => (
+          {skillsData.map(({ categoryKey, icon, color, skills }, catIdx) => (
             <motion.div
-              key={category}
+              key={categoryKey}
               className={styles.categoryCard}
               style={{ "--cat-color": color }}
               initial={{ opacity: 0, y: 30 }}
@@ -108,7 +110,7 @@ export default function Skills() {
             >
               <div className={styles.categoryHeader}>
                 <span className={styles.categoryIcon}>{icon}</span>
-                <h2 className={styles.categoryName}>{category}</h2>
+                <h2 className={styles.categoryName}>{categoryKey}</h2>
               </div>
               <div className={styles.skillsList}>
                 {skills.map((skill, i) => (
@@ -131,11 +133,7 @@ export default function Skills() {
           transition={{ delay: 0.3, duration: 0.6 }}
           viewport={{ once: true }}
         >
-          <p>
-            Experiência comprovada em desenvolvimento Frontend e Backend, gestão de bases de dados
-            e ferramentas de design. Sempre em aprendizagem contínua — se existe uma nova tecnologia
-            que resolve um problema real, vou dominá-la.
-          </p>
+          <p>{s.summary}</p>
         </motion.div>
       </div>
     </section>

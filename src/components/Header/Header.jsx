@@ -4,21 +4,15 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useLanguage } from "@/context/LanguageContext";
 import styles from "./Header.module.css";
-
-const navLinks = [
-  { href: "/", label: "Início" },
-  { href: "/about", label: "Sobre" },
-  { href: "/projects", label: "Projetos" },
-  { href: "/skills", label: "Skills" },
-  { href: "/contact", label: "Contacto" },
-];
 
 export default function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef(null);
+  const { lang, toggle, t } = useLanguage();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -51,7 +45,7 @@ export default function Header() {
 
         {/* Desktop Links */}
         <ul className={styles.links}>
-          {navLinks.map(({ href, label }) => (
+          {t.header.nav.map(({ href, label }) => (
             <li key={href}>
               <Link
                 href={href}
@@ -70,15 +64,41 @@ export default function Header() {
           ))}
         </ul>
 
-        {/* CTA */}
-        <a
-          href="/Tomas_Ribeiro_CV.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className={styles.ctaBtn}
-        >
-          Ver CV
-        </a>
+        {/* Right side actions */}
+        <div className={styles.actions}>
+          {/* Language Toggle */}
+          <button
+            className={styles.langToggle}
+            onClick={toggle}
+            aria-label={lang === "pt" ? "Switch to English" : "Mudar para Português"}
+            id="lang-toggle-btn"
+          >
+            <motion.span
+              key={lang}
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 6 }}
+              transition={{ duration: 0.2 }}
+              className={styles.langLabel}
+            >
+              {lang === "pt" ? "🇵🇹 PT" : "🇬🇧 EN"}
+            </motion.span>
+            <span className={styles.langSep}>|</span>
+            <span className={styles.langOther}>
+              {lang === "pt" ? "EN" : "PT"}
+            </span>
+          </button>
+
+          {/* CV Button */}
+          <a
+            href="/Tomas_Ribeiro_CV.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.ctaBtn}
+          >
+            {t.header.cv}
+          </a>
+        </div>
 
         {/* Mobile Hamburger */}
         <button
@@ -113,7 +133,7 @@ export default function Header() {
               transition={{ duration: 0.25, ease: "easeOut" }}
               id="mobile-menu"
             >
-              {navLinks.map(({ href, label }, i) => (
+              {t.header.nav.map(({ href, label }, i) => (
                 <motion.div
                   key={href}
                   initial={{ opacity: 0, x: -20 }}
@@ -128,6 +148,17 @@ export default function Header() {
                   </Link>
                 </motion.div>
               ))}
+
+              {/* Language toggle in mobile menu */}
+              <div className={styles.mobileLangRow}>
+                <button
+                  className={styles.mobileLangBtn}
+                  onClick={toggle}
+                  id="mobile-lang-toggle-btn"
+                >
+                  {lang === "pt" ? "🇬🇧 Switch to English" : "🇵🇹 Mudar para Português"}
+                </button>
+              </div>
             </motion.div>
           </>
         )}
