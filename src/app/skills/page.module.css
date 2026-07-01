@@ -1,0 +1,164 @@
+.skills {
+  padding: 6rem 2rem 4rem;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+/* Page Header */
+.pageHeader {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+.pageTag {
+  font-family: 'Courier New', monospace;
+  font-size: 0.8rem;
+  color: #3b82f6;
+  background: rgba(59, 130, 246, 0.1);
+  border: 1px solid rgba(59, 130, 246, 0.2);
+  padding: 0.3rem 0.85rem;
+  border-radius: 9999px;
+  letter-spacing: 0.08em;
+}
+.pageTitle {
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #f1f5f9;
+  letter-spacing: -0.03em;
+}
+.accent {
+  background: linear-gradient(135deg, #60a5fa, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.pageSubtitle { font-size: 1rem; color: #64748b; }
+
+/* Categories Grid */
+.categoriesGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+}
+
+/* Category Card */
+.categoryCard {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  transition: border-color 0.25s ease;
+}
+.categoryCard:hover {
+  border-color: color-mix(in srgb, var(--cat-color) 30%, transparent);
+}
+
+.categoryHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.categoryIcon {
+  font-size: 1.5rem;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--cat-color) 12%, transparent);
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--cat-color) 20%, transparent);
+}
+.categoryName {
+  font-family: var(--font-outfit, 'Outfit', sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+/* Skills List */
+.skillsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.skillItem { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.skillHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.skillIcon { font-size: 0.95rem; }
+.skillName {
+  flex: 1;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #94a3b8;
+}
+.skillPercent {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  font-family: 'Courier New', monospace;
+}
+
+/* Progress Bar */
+.track {
+  height: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.fill {
+  height: 100%;
+  border-radius: 9999px;
+  position: relative;
+}
+.fill::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: inherit;
+  box-shadow: 0 0 6px 2px currentColor;
+}
+
+/* Summary */
+.summary {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+}
+.summary p {
+  font-size: 0.9rem;
+  color: #475569;
+  line-height: 1.75;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .skills { padding: 5rem 1.25rem 3rem; }
+  .categoriesGrid { grid-template-columns: 1fr; }
+}
