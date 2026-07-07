@@ -19,11 +19,11 @@ const outfit = Outfit({
 export const metadata = {
   title: "Tomás Ribeiro — Fullstack Developer",
   description:
-    "Portfolio of Tomás Ribeiro, a Fullstack Developer specialized in React, Next.js, Node.js and high-performance digital experiences.",
-  keywords: ["fullstack developer", "react", "next.js", "portfolio", "tomás ribeiro"],
+    "Portfólio de Tomás Ribeiro — fullstack developer em Viana do Castelo. React, Next.js, Node.js e muito mais.",
+  keywords: ["fullstack developer", "react", "next.js", "portfólio", "tomás ribeiro", "viana do castelo"],
   openGraph: {
     title: "Tomás Ribeiro — Fullstack Developer",
-    description: "High-performance digital experiences. Specialized in React, Next.js and Node.js.",
+    description: "Construo produtos digitais rápidos e focados no utilizador.",
     type: "website",
   },
 };

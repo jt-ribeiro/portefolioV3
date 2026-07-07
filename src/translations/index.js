@@ -12,17 +12,17 @@ export const translations = {
     },
 
     home: {
-      badge: "Disponível para novos projetos",
-      greeting: "Olá, sou o",
+      badge: "Disponível para projetos",
+      greeting: "Olá, sou",
       name: "Tomás Ribeiro",
-      roles: ["Fullstack Developer", "React & Next.js", "UI/UX Enthusiast", "Problem Solver"],
+      roles: ["Fullstack Developer", "React & Next.js", "Builder de produtos", "Problem Solver"],
       description:
-        "Transformo ideias em experiências digitais de alta performance. Especializado em React, Next.js e Node.js — apaixonado por design e código limpo.",
-      btnProjects: "Ver Projetos",
+        "Construo produtos digitais rápidos, focados e com atenção ao detalhe. Gosto de trabalhar próximo dos projetos — da ideia até estar live.",
+      btnProjects: "Ver o meu trabalho",
       btnContact: "Falar comigo",
       stats: [
-        { num: "7+", label: "Projetos Entregues" },
-        { num: "3+", label: "Anos de Experiência" },
+        { num: "7+", label: "Projetos entregues" },
+        { num: "3+", label: "Anos a programar" },
         { num: "95+", label: "Lighthouse Score" },
       ],
     },
@@ -175,17 +175,17 @@ export const translations = {
     },
 
     home: {
-      badge: "Available for new projects",
+      badge: "Available for projects",
       greeting: "Hi, I'm",
       name: "Tomás Ribeiro",
-      roles: ["Fullstack Developer", "React & Next.js", "UI/UX Enthusiast", "Problem Solver"],
+      roles: ["Fullstack Developer", "React & Next.js", "Product Builder", "Problem Solver"],
       description:
-        "I turn ideas into high-performance digital experiences. Specialized in React, Next.js and Node.js — passionate about design and clean code.",
-      btnProjects: "View Projects",
-      btnContact: "Let's talk",
+        "I build fast, focused digital products with attention to detail. I like staying close to projects — from idea all the way to going live.",
+      btnProjects: "See my work",
+      btnContact: "Get in touch",
       stats: [
-        { num: "7+", label: "Projects Delivered" },
-        { num: "3+", label: "Years of Experience" },
+        { num: "7+", label: "Projects shipped" },
+        { num: "3+", label: "Years coding" },
         { num: "95+", label: "Lighthouse Score" },
       ],
     },

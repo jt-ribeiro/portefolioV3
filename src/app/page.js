@@ -1,130 +1,87 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useLanguage } from "@/context/LanguageContext";
 import styles from "./page.module.css";
 
-function useTypewriter(words, speed = 80, pause = 2000) {
-  const [display, setDisplay] = useState("");
-  const [wordIndex, setWordIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
+function useTypewriter(words, speed = 75, pause = 2200) {
+  const [display, setDisplay] = useState(words[0]);
+  const [wordIdx, setWordIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
-    const current = words[wordIndex % words.length];
-    let timeout;
-    if (!isDeleting && display === current) {
-      timeout = setTimeout(() => setIsDeleting(true), pause);
-    } else if (isDeleting && display === "") {
-      setIsDeleting(false);
-      setWordIndex((i) => (i + 1) % words.length);
+    const current = words[wordIdx % words.length];
+    let t;
+    if (!deleting && display === current) {
+      t = setTimeout(() => setDeleting(true), pause);
+    } else if (deleting && display === "") {
+      setDeleting(false);
+      setWordIdx((i) => (i + 1) % words.length);
     } else {
-      timeout = setTimeout(() => {
-        setDisplay(isDeleting ? current.slice(0, display.length - 1) : current.slice(0, display.length + 1));
-      }, isDeleting ? speed / 2 : speed);
+      t = setTimeout(
+        () => setDisplay(deleting ? current.slice(0, display.length - 1) : current.slice(0, display.length + 1)),
+        deleting ? speed / 2 : speed
+      );
     }
-    return () => clearTimeout(timeout);
-  }, [display, isDeleting, wordIndex, words, speed, pause]);
+    return () => clearTimeout(t);
+  }, [display, deleting, wordIdx, words, speed, pause]);
 
   return display;
 }
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 24 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] },
+});
 
 export default function Home() {
   const { t } = useLanguage();
   const h = t.home;
   const role = useTypewriter(h.roles);
-  const canvasRef = useRef(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    let animId;
-    let particles = [];
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-    };
-    resize();
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 1.5 + 0.3,
-        dx: (Math.random() - 0.5) * 0.3,
-        dy: (Math.random() - 0.5) * 0.3,
-        opacity: Math.random() * 0.4 + 0.1,
-      });
-    }
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      particles.forEach((p) => {
-        p.x += p.dx;
-        p.y += p.dy;
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(99, 179, 237, ${p.opacity})`;
-        ctx.fill();
-      });
-      animId = requestAnimationFrame(draw);
-    };
-    draw();
-    window.addEventListener("resize", resize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
-  }, []);
-
-  const container = {
-    hidden: { opacity: 0 },
-    show: { opacity: 1, transition: { staggerChildren: 0.18, delayChildren: 0.2 } },
-  };
-  const item = {
-    hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] } },
-  };
 
   return (
     <section className={styles.hero}>
-      <canvas ref={canvasRef} className={styles.canvas} aria-hidden="true" />
-      <div className={styles.orb1} aria-hidden="true" />
-      <div className={styles.orb2} aria-hidden="true" />
+      <div className={styles.container}>
 
-      <motion.div className={styles.content} variants={container} initial="hidden" animate="show">
-        <motion.div className={styles.badge} variants={item}>
-          <span className={styles.badgeDot} />
-          {h.badge}
+        {/* Name */}
+        <motion.div className={styles.nameBlock} {...fadeUp(0.1)}>
+          <span className={styles.greeting}>{h.greeting}</span>
+          <h1 className={styles.name}>{h.name}<span className={styles.accent}>.</span></h1>
         </motion.div>
 
-        <motion.h1 className={styles.title} variants={item}>
-          {h.greeting}{" "}
-          <span className={styles.gradientText}>{h.name}</span>
-        </motion.h1>
-
-        <motion.div className={styles.roleRow} variants={item}>
-          <span className={styles.rolePrefix}>→ </span>
+        {/* Role */}
+        <motion.div className={styles.roleRow} {...fadeUp(0.25)}>
+          <span className={styles.prompt}>→</span>
           <span className={styles.role}>{role}</span>
-          <span className={styles.cursor}>|</span>
+          <span className={styles.cursor} aria-hidden="true">_</span>
         </motion.div>
 
-        <motion.p className={styles.description} variants={item}>
+        {/* Description */}
+        <motion.p className={styles.desc} {...fadeUp(0.4)}>
           {h.description}
         </motion.p>
 
-        <motion.div className={styles.actions} variants={item}>
-          <Link href="/projects" className={styles.btnPrimary}>
-            {h.btnProjects}
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </Link>
-          <Link href="/contact" className={styles.btnSecondary}>
-            {h.btnContact}
-          </Link>
+        {/* CTAs */}
+        <motion.div className={styles.ctas} {...fadeUp(0.55)}>
+          <Link href="/projects" className={styles.btnPrimary}>{h.btnProjects}</Link>
+          <Link href="/contact" className={styles.btnSecondary}>{h.btnContact}</Link>
         </motion.div>
 
-        <motion.div className={styles.stats} variants={item}>
+        {/* Tech stack strip */}
+        <motion.div className={styles.stackRow} {...fadeUp(0.7)}>
+          {["React", "Next.js", "Node.js", "PostgreSQL", "TensorFlow.js"].map((tech, i) => (
+            <span key={tech} className={styles.stackItem}>
+              {tech}
+              {i < 4 && <span className={styles.stackDot} aria-hidden="true">/</span>}
+            </span>
+          ))}
+        </motion.div>
+
+        {/* Stats — minimal, no cards */}
+        <motion.div className={styles.stats} {...fadeUp(0.85)}>
           {h.stats.map(({ num, label }) => (
             <div key={label} className={styles.stat}>
               <span className={styles.statNum}>{num}</span>
@@ -132,20 +89,18 @@ export default function Home() {
             </div>
           ))}
         </motion.div>
-      </motion.div>
 
+      </div>
+
+      {/* Side tag */}
       <motion.div
-        className={styles.scroll}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
+        className={styles.sideTag}
+        initial={{ opacity: 0, x: 20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ delay: 1.2, duration: 0.5 }}
         aria-hidden="true"
       >
-        <motion.div
-          className={styles.scrollDot}
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 1.4, ease: "easeInOut" }}
-        />
+        <span>Viana do Castelo · Portugal</span>
       </motion.div>
     </section>
   );
