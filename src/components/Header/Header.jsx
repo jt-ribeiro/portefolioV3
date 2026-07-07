@@ -64,8 +64,7 @@ export default function Header() {
 
           <a
             href="/Tomas_Ribeiro_CV.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            download="Tomas_Ribeiro_CV.pdf"
             className={styles.cvBtn}
           >
             {t.header.cv}
