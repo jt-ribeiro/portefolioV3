@@ -63,8 +63,8 @@ export default function Header() {
           </button>
 
           <a
-            href="/Tomas_Ribeiro_CV.pdf"
-            download="Tomas_Ribeiro_CV.pdf"
+            href="/CV_Tomas_Ribeiro_7Graus.pdf"
+            download="CV_Tomas_Ribeiro_7Graus.pdf"
             className={styles.cvBtn}
           >
             {t.header.cv}
