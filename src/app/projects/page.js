@@ -7,13 +7,48 @@ import styles from "./page.module.css";
 
 // Static data (URLs, tech, colors) stays outside translations
 const PROJECT_META = [
-  { github: "https://github.com/jt-ribeiro/hand-voice-chrome-ext", demo: "", website: "", tech: ["TensorFlow.js", "Handpose", "Web Speech API", "Chrome APIs"], color: "#3b82f6", icon: "🧠" },
-  { github: "https://github.com/jt-ribeiro/reservas-qr.git", demo: "", website: "", tech: ["Next.js", "Prisma", "PostgreSQL", "QR Code"], color: "#7c3aed", icon: "📱" },
-  { github: "https://github.com/jt-ribeiro/RestaurantV2-app", demo: "/0210.mp4", website: "", tech: ["React", "PHP", "MySQL", "SCSS"], color: "#06b6d4", icon: "🍽️" },
-  { github: "https://github.com/jt-ribeiro/websiteDentista.git", demo: "", website: "", tech: ["Next.js 14", "Framer Motion", "Lucide React", "Chatbot"], color: "#10b981", icon: "🦷" },
-  { github: "https://github.com/jt-ribeiro/CryptoHub.git", demo: "", website: "", tech: ["HTML5", "Sass", "JavaScript", "Chart.js"], color: "#f59e0b", icon: "📊" },
-  { github: "https://github.com/jt-ribeiro/goldylocks-pos-frontend", demo: "", website: "", tech: ["Vue.js", "PHP", "MySQL", "Jest"], color: "#ef4444", icon: "⚙️" },
-  { github: "https://github.com/jt-ribeiro/barbosa-martins-advocacia", demo: "", website: "https://vercel.com/tomas-ribeiros-projects-2ec4a16d/barbosa-martins-advocacia", tech: ["React", "Sass", "Framer Motion", "Figma"], color: "#8b5cf6", icon: "⚖️" },
+  {
+    github: "https://github.com/jt-ribeiro/ExtensaoGestos",
+    demo: "", website: "",
+    tech: ["TensorFlow.js", "P5.js", "Web Speech API", "Chrome APIs"],
+    color: "#3b82f6", icon: "🧠",
+  },
+  {
+    github: "https://github.com/jt-ribeiro/FazPorMimFullStack",
+    demo: "", website: "",
+    tech: ["React", "Node.js", "Express", "PostgreSQL"],
+    color: "#7c3aed", icon: "🔗",
+  },
+  {
+    github: "https://github.com/jt-ribeiro/BuggyFlow",
+    demo: "", website: "",
+    tech: ["Node.js", "Express", "PostgreSQL", "REST APIs"],
+    color: "#f97316", icon: "🚗",
+  },
+  {
+    github: "https://github.com/jt-ribeiro/RestaurantV2-app",
+    demo: "", website: "",
+    tech: ["React Native", "Node.js", "MySQL", "REST APIs"],
+    color: "#06b6d4", icon: "🍽️",
+  },
+  {
+    github: "https://github.com/jt-ribeiro/websiteDentista",
+    demo: "", website: "",
+    tech: ["Next.js", "Framer Motion", "Chatbot", "Tailwind"],
+    color: "#10b981", icon: "🦷",
+  },
+  {
+    github: "https://github.com/jt-ribeiro/CryptoHub",
+    demo: "", website: "",
+    tech: ["HTML5", "Sass", "JavaScript", "Chart.js"],
+    color: "#f59e0b", icon: "📊",
+  },
+  {
+    github: "https://github.com/jt-ribeiro/barbosa-martins-advocacia",
+    demo: "", website: "https://vercel.com/tomas-ribeiros-projects-2ec4a16d/barbosa-martins-advocacia",
+    tech: ["React", "Sass", "Framer Motion", "Figma"],
+    color: "#8b5cf6", icon: "⚖️",
+  },
 ];
 
 const containerVariants = {

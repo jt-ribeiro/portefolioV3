@@ -7,7 +7,7 @@ import styles from "./page.module.css";
 
 const EMAIL = "tomasribeiro930@gmail.com";
 const GITHUB = "https://github.com/jt-ribeiro";
-const LINKEDIN = "https://linkedin.com/in/tomas-ribeiro-dev";
+const LINKEDIN = "https://www.linkedin.com/in/tomás-ribeiro-4a0a9b390";
 
 const METHOD_ICONS = [
   // Email

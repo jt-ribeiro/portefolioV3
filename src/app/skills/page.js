@@ -11,12 +11,12 @@ const skillsData = [
     icon: "🖥️",
     color: "#3b82f6",
     skills: [
-      { name: "React & Next.js", level: 95, icon: "⚛️" },
+      { name: "React & Next.js", level: 90, icon: "⚛️" },
       { name: "JavaScript ES6+", level: 90, icon: "🟨" },
-      { name: "HTML5 / CSS3 / SCSS", level: 100, icon: "🌐" },
-      { name: "React Native", level: 85, icon: "📱" },
-      { name: "Vue.js", level: 70, icon: "🟢" },
-      { name: "Ionic", level: 65, icon: "🔌" },
+      { name: "HTML5 / CSS3 / SCSS", level: 95, icon: "🌐" },
+      { name: "Vue.js", level: 75, icon: "🟢" },
+      { name: "React Native", level: 80, icon: "📱" },
+      { name: "P5.js", level: 70, icon: "🎨" },
     ],
   },
   {
@@ -24,34 +24,38 @@ const skillsData = [
     icon: "⚙️",
     color: "#7c3aed",
     skills: [
-      { name: "Node.js & APIs REST", level: 90, icon: "🟩" },
-      { name: "PHP", level: 90, icon: "🐘" },
-      { name: "AI / TensorFlow.js", level: 85, icon: "🧠" },
-      { name: "C / C++", level: 75, icon: "⚙️" },
+      { name: "Node.js & Express", level: 85, icon: "🟩" },
+      { name: "PHP", level: 85, icon: "🐘" },
+      { name: "REST APIs", level: 90, icon: "🔌" },
+      { name: "Laravel", level: 55, icon: "🏗️" },
+      { name: "TensorFlow.js", level: 75, icon: "🧠" },
+      { name: "TypeScript (básico)", level: 50, icon: "🔷" },
     ],
   },
   {
-    categoryKey: "Databases",
+    categoryKey: "Bases de Dados",
     icon: "🗄️",
     color: "#06b6d4",
     skills: [
-      { name: "PostgreSQL / MySQL", level: 90, icon: "🗄️" },
-      { name: "MongoDB", level: 80, icon: "🍃" },
-      { name: "Prisma ORM", level: 85, icon: "🔷" },
+      { name: "MySQL", level: 90, icon: "🗄️" },
+      { name: "PostgreSQL", level: 85, icon: "🐘" },
+      { name: "Firebase", level: 65, icon: "🔥" },
     ],
   },
   {
-    categoryKey: "Tools & Design",
-    icon: "🎨",
+    categoryKey: "Mobile & Tools",
+    icon: "📱",
     color: "#10b981",
     skills: [
-      { name: "Git & GitHub", level: 92, icon: "🔀" },
-      { name: "Figma / UI Design", level: 85, icon: "🎨" },
-      { name: "Framer Motion", level: 90, icon: "✨" },
-      { name: "Docker", level: 65, icon: "🐳" },
+      { name: "Ionic", level: 65, icon: "⚡" },
+      { name: "Git & GitHub", level: 90, icon: "🔀" },
+      { name: "SCRUM / MVC", level: 80, icon: "📋" },
+      { name: "Figma", level: 75, icon: "🎨" },
+      { name: "Claude & Cursor (AI Dev)", level: 90, icon: "🤖" },
     ],
   },
 ];
+
 
 function SkillBar({ skill, color, delay }) {
   const ref = useRef(null);
